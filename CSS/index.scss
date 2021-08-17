@@ -106,6 +106,33 @@ main {
   }
 } // END OF TASKS CONTAINER STYLES.
 
+// Footer styles
+footer {
+  @include displayFlex(column, center, center);
+  background: black;
+  padding: 1rem;
+  .logo-section {
+    margin: 1rem;
+    img {
+      display: block;
+      width: 8rem;
+      margin: 0 auto;
+    }
+  }
+  .accounts-section {
+    img {
+      width: 3rem;
+      margin: 0 5px;
+      filter: invert(100%);
+    }
+  }
+  .copyright-section small {
+    color: white;
+    display: block;
+    text-align: center;
+  }
+} // END OF FOOTER STYLES
+
 @media only screen and (min-width: 1200px) {
   header {
     text-align: center;
