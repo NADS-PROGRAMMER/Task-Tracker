@@ -1,0 +1,134 @@
+$dangerColor: #d9534f;
+$successColor: #5cb85c;
+$infoColor: #5bc0de;
+$bodyColor: #f7f7f7;
+$headerColor: #292b2c;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+  background: $bodyColor;
+}
+
+@mixin displayFlex($direction, $align-items, $justify-content) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+@mixin buttonStyles($padding, $font-size, $color) {
+  padding: $padding;
+  font-size: $font-size;
+  background-color: $color;
+  border: none;
+  outline: 1px solid black;
+}
+
+// Styles for header
+header {
+  background: $headerColor;
+  width: 100%;
+  padding: 1rem;
+
+  h1 {
+    color: $bodyColor;
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1rem;
+    color: $infoColor;
+  }
+}
+
+main {
+  height: 100%;
+}
+
+#task-tracker {
+  padding: 1rem;
+  .task-tracker-header {
+    margin-bottom: 5px;
+    // Heading - 2
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    // Input section
+    .input-section {
+      #textbox,
+      #add-button {
+        font-size: 1rem;
+        padding: 5px;
+        margin-top: 5px;
+      }
+      #add-button {
+        @include buttonStyles(5px, 1rem, $successColor);
+        width: 5rem;
+      }
+    }
+
+    .date-section {
+      margin: 5px 0 10px 0;
+      input[type="date"] {
+        font-size: 1rem;
+        padding: 5px;
+      }
+    }
+  }
+}
+
+// Task division
+#tasks {
+  list-style-type: none;
+  overflow-y: auto;
+  height: 50vh;
+  .task {
+    @include displayFlex(row, flex-start, space-between);
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+
+    .task-section {
+      #date-content {
+        font-weight: bold;
+        font-family: Rockwell, sans-serif;
+      }
+    }
+    .button-section {
+      @include displayFlex(row, none, space-between);
+      * {
+        margin: 2px;
+      }
+      #update-button {
+        @include buttonStyles(5px, 1rem, $infoColor);
+      }
+      #delete-button {
+        @include buttonStyles(5px, 1rem, $dangerColor);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  header {
+    text-align: center;
+    h1 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+
+  main {
+    width: 30%;
+    margin: 0 auto;
+  }
+}
