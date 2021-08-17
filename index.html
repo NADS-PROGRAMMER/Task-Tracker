@@ -10,19 +10,22 @@
 <body>
     <header>
         <h1>Task Tracker</h1>
-        <h3>Created by: CodingNadzkie</h3>
+        <h3>Keep Your Task On Track</h3>
     </header>
 
     <main>
         <div id="task-tracker">
             <section class="task-tracker-header">
-                <h2>Add New Task</h2>
-                <section class="input-section">
-                    <input type="text" name="" id="textbox">
-                    <button id="add-button">Add</button>
+                <section class="input-sections">
+                    <label for="textbox">Task</label>
+                    <input type="text" name="" id="textbox" placeholder="New task here">
                 </section>
-                <section class="date-section">
+                <section class="input-sections">
+                    <label for="date">Due Date</label>
                     <input type="date" name="" id="date">
+                </section>
+                <section class="input-sections">
+                    <button id="add-button">Add</button>
                 </section>
             </section>
             <ul id="tasks">
