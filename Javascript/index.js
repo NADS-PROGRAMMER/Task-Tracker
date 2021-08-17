@@ -2,12 +2,13 @@
 
 document.querySelector('#add-button').addEventListener('click', () => {
     
-    let task = document.querySelector('#textbox').value;
-    let date = document.querySelector('#date').value;
+    let task = document.querySelector('#textbox');
+    let date = document.querySelector('#date');
     let ul = document.querySelector('#tasks');
 
-    ul.appendChild(createTask(task, date));
-    console.log(createTask('task', 'date'))
+    ul.appendChild(createTask(task.value, date.value));
+    task.value = '';
+    date.value = '';
 })
 
 function createTask(task, date) {
@@ -51,12 +52,4 @@ function addRemoveEvent(button, anotherElem) {
 
         anotherElem.remove();
     })
-}
-
-function addUpdateEvent(button, anotherElem) {
-
-    button.addEventListener('click', () => {
-
-        
-    });
 }

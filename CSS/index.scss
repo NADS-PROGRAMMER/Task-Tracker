@@ -27,8 +27,7 @@ body {
   padding: $padding;
   font-size: $font-size;
   background-color: $color;
-  border: none;
-  outline: 1px solid black;
+  border: 1px solid black;
 }
 
 // Styles for header
@@ -54,31 +53,22 @@ main {
 #task-tracker {
   padding: 1rem;
   .task-tracker-header {
-    margin-bottom: 5px;
-    // Heading - 2
-    h2 {
-      font-size: 1.5rem;
-    }
+    @include displayFlex(column, none, none);
 
-    // Input section
-    .input-section {
-      #textbox,
-      #add-button {
-        font-size: 1rem;
+    .input-sections {
+      @include displayFlex(column, none, space-between);
+      margin: 5px 0;
+
+      label {
+        font-size: 1.1rem;
+      }
+      input,
+      button {
         padding: 5px;
-        margin-top: 5px;
+        font-size: 1rem;
       }
       #add-button {
-        @include buttonStyles(5px, 1rem, $successColor);
-        width: 5rem;
-      }
-    }
-
-    .date-section {
-      margin: 5px 0 10px 0;
-      input[type="date"] {
-        font-size: 1rem;
-        padding: 5px;
+        @include buttonStyles(5px, -1rem, $successColor);
       }
     }
   }
@@ -114,7 +104,7 @@ main {
       }
     }
   }
-}
+} // END OF TASKS CONTAINER STYLES.
 
 @media only screen and (min-width: 1200px) {
   header {
@@ -128,7 +118,11 @@ main {
   }
 
   main {
-    width: 30%;
+    width: 50%;
     margin: 0 auto;
+
+    .task-tracker-header {
+      @include displayFlex(row, stretch, space-between);
+    }
   }
 }
