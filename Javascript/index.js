@@ -1,3 +1,5 @@
+import {UpdateComponent} from './container/UpdateComponent.js';
+
 "use strict";
 
 document.querySelector('#add-button').addEventListener('click', () => {
@@ -33,7 +35,14 @@ function createTask(task, date) {
     dateContent.textContent = date;
     updateButton.textContent = 'Update';
     deleteButton.textContent = 'Delete';
+
+    // add event listener
     addRemoveEvent(deleteButton, li);
+    updateButton.addEventListener('click', () => {
+
+        updateSection.style.display = 'flex';
+    })
+
 
     taskSection.appendChild(taskContent);
     taskSection.append(dateContent);
@@ -42,6 +51,8 @@ function createTask(task, date) {
 
     li.appendChild(taskSection);
     li.appendChild(buttonSection);
+    let updateSection = UpdateComponent(li);
+    li.appendChild(updateSection);
 
     return li;
 }
@@ -52,9 +63,4 @@ function addRemoveEvent(button, anotherElem) {
 
         anotherElem.remove();
     })
-}
-
-function addUpdateElement({button, textbox, date, taskContent, dateContent}) {
-
-    button.addEventListener('click', )
 }
