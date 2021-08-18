@@ -53,3 +53,8 @@ function addRemoveEvent(button, anotherElem) {
         anotherElem.remove();
     })
 }
+
+function addUpdateElement({button, textbox, date, taskContent, dateContent}) {
+
+    button.addEventListener('click', )
+}

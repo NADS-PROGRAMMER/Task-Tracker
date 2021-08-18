@@ -103,6 +103,35 @@ main {
         @include buttonStyles(5px, 1rem, $dangerColor);
       }
     }
+
+    .update-section {
+      @include displayFlex(column, none, none);
+      display: none;
+      width: 100%;
+      section {
+        @include displayFlex(column, none, none);
+        margin: 5px 0;
+        input,
+        button {
+          padding: 5px;
+          font-size: 1rem;
+        }
+      }
+      .update-button-section {
+        @include displayFlex(row, center, flex-end);
+        width: 100%;
+
+        * {
+          margin: 0 5px;
+        }
+        #done-button {
+          @include buttonStyles(5px, 1rem, $successColor);
+        }
+        #cancel-button {
+          @include buttonStyles(5px, 1rem, $infoColor);
+        }
+      }
+    }
   }
 } // END OF TASKS CONTAINER STYLES.
 
