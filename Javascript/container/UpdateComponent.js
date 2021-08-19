@@ -1,12 +1,20 @@
 "use strict";
 
+/**
+ * A function that creates an UpdateComponent.
+ * 
+ * @param task 
+ * - task that this UpdateComponent to attached to.
+ * @returns 
+ * - the UpdateComponent, as a whole.
+ */
 function UpdateComponent(task) {
 
     let updateSection = document.createElement('section');
     updateSection.setAttribute('class', 'update-section');
 
     updateSection.appendChild(
-        createSection(
+        createInputField(
         {
             labelContent: 'New Task Name', 
             type: 'text'
@@ -14,7 +22,7 @@ function UpdateComponent(task) {
     ));
 
     updateSection.appendChild(
-        createSection(
+        createInputField(
         {
             labelContent: 'Due Date',
             type: 'date'
@@ -26,7 +34,18 @@ function UpdateComponent(task) {
     return updateSection;
 }
 
-function createSection ({labelContent, type}) {
+/**
+ * A function that creates an input tag and specified
+ * the type by its parameter labelContent.
+ * 
+ * @param labelContent 
+ * - Content of the label tag.
+ * @param type 
+ * - type of the input 
+ * @returns 
+ * - the section that contains the input tag.
+ */
+function createInputField ({labelContent, type}) {
 
     let section = document.createElement('section');
     let label = document.createElement('label');
@@ -41,6 +60,17 @@ function createSection ({labelContent, type}) {
     return section;
 }
 
+/**
+ * A function that creates a button that 
+ * accepts textContent and id.
+ * 
+ * @param textContent
+ * - the text of the button.
+ * @param id 
+ * - the id of the button
+ * @returns 
+ * - the button tag.
+ */
 function createButton({textContent, id}) {
 
     let button = document.createElement('button');
@@ -68,15 +98,19 @@ function createButtonSection(task) {
         task.firstChild.lastChild.textContent = date.value;
         textbox.value = '';
         date.value = '';
-    })
+    });
 
     cancelButton.addEventListener('click', () => {
 
+        // Hides the update section.
         task.firstChild.nextSibling.nextElementSibling.style.display = 'none';
-    })
+    });
+
+    // Appends the two buttons.
     section.appendChild(doneButton);
     section.appendChild(cancelButton);
 
     return section;
 }
+
 export {UpdateComponent}
