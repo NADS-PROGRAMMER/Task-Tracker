@@ -1,55 +1,57 @@
-$dangerColor: #d9534f;
-$successColor: #5cb85c;
-$infoColor: #5bc0de;
-$bodyColor: #f7f7f7;
-$headerColor: #292b2c;
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Poppins, sans-serif;
-}
+@import "./config", "./deviceWidth";
 
 body {
+  @include displayFlex(column, none, space-between);
+  height: 100vh;
   overflow-x: hidden;
   background: $bodyColor;
 }
 
-@mixin displayFlex($direction, $align-items, $justify-content) {
-  display: flex;
-  flex-direction: $direction;
-  align-items: $align-items;
-  justify-content: $justify-content;
-}
-
-@mixin buttonStyles($padding, $font-size, $color) {
-  padding: $padding;
-  font-size: $font-size;
-  background-color: $color;
-  border: 1px solid black;
-}
-
-// Styles for header
+// HEADER STYLES -
 header {
   background: $headerColor;
-  width: 100%;
   padding: 1rem;
+  width: 100%;
 
   h1 {
     color: $bodyColor;
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   h3 {
     font-size: 1rem;
     color: $infoColor;
   }
+
+  // MEDIA QUERIES
+  @include lg {
+    text-align: center;
+    h1 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 main {
   height: 100%;
+
+  // MEDIA QUERIES
+  @include lg {
+    width: 70%;
+    height: 50vh;
+    margin: 0 auto;
+  }
+  @include desktop {
+    width: 60%;
+  }
 }
 
+/* TASK TRACKER STYLES 
+
+  It contains the header and the list of tasks of the user.
+*/
 #task-tracker {
   padding: 1rem;
   .task-tracker-header {
@@ -69,35 +71,67 @@ main {
       }
       #add-button {
         @include buttonStyles(5px, -1rem, $successColor);
+        cursor: pointer;
+      }
+      #add-button:active {
+        background: darken($successColor, 10%);
       }
     }
   }
+
+  // MEDIA QUERIES
+  @include lg {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr;
+    column-gap: 1rem;
+
+    height: 50%;
+  }
 }
 
-// Task division
+/* 
+  TASKS STYLES
+  A unordered list that consist of all the list items.
+*/
+.main-task-container {
+  @include lg {
+    @include displayFlex(column, none, none);
+  }
+}
+
+// The <ul> tag
 #tasks {
   list-style-type: none;
   overflow-y: auto;
   height: 50vh;
+  border: 1px solid #ccc;
+  @include lg {
+    max-height: 30vh;
+  }
+  // The <li>' tag
   .task {
     @include displayFlex(column, flex-start, space-between);
-    flex-wrap: wrap;
     border: 1px solid #ccc;
     padding: 0.5rem;
-
+    /* Section that contains the TASK CONTENT and the DATE CONTENT */
     .task-section {
       #task-content {
+        font-size: 1.2rem;
+        font-weight: bold;
         word-break: break-all;
       }
       #date-content {
-        font-weight: bold;
+        font-weight: 600;
         font-family: Rockwell, sans-serif;
       }
     }
+
+    /* Section that contains the UPDATE and DELETE buttons. */
     .button-section {
       @include displayFlex(row, none, space-between);
       * {
         margin: 2px;
+        cursor: pointer;
       }
       #update-button {
         @include buttonStyles(5px, 1rem, $infoColor);
@@ -105,12 +139,24 @@ main {
       #delete-button {
         @include buttonStyles(5px, 1rem, $dangerColor);
       }
+      #update-button:active {
+        background: darken($infoColor, 10%);
+      }
+      #delete-button:active {
+        background: darken($dangerColor, 10%);
+      }
     }
 
+    /* Section that contains the input tags and buttons for updating the task */
     .update-section {
       @include displayFlex(column, none, none);
       display: none;
       width: 100%;
+
+      // Media Queries for large screen
+      @include lg {
+        width: 50%;
+      }
       section {
         @include displayFlex(column, none, none);
         margin: 5px 0;
@@ -138,7 +184,7 @@ main {
   }
 } // END OF TASKS CONTAINER STYLES.
 
-// Footer styles
+// FOOTER STYLES
 footer {
   @include displayFlex(column, center, center);
   background: black;
@@ -163,35 +209,7 @@ footer {
     display: block;
     text-align: center;
   }
+  @include lg {
+    height: fit-content;
+  }
 } // END OF FOOTER STYLES
-
-@media only screen and (min-width: 1200px) {
-  body {
-    height: 100%;
-  }
-  header {
-    text-align: center;
-    h1 {
-      font-size: 3rem;
-    }
-    h3 {
-      font-size: 1.5rem;
-    }
-  }
-
-  main {
-    width: 50%;
-    height: 50vh;
-    margin: 0 auto;
-
-    #task-tracker {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(auto, auto));
-      column-gap: 1rem;
-    }
-  }
-
-  footer {
-    height: 100%;
-  }
-}
