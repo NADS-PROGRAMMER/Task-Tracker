@@ -22,6 +22,7 @@ function createTask(task, date) {
     let buttonSection = document.createElement('section');
     let updateButton = document.createElement('button');
     let deleteButton = document.createElement('button');
+    let updateSection = UpdateComponent(li);
 
     li.setAttribute('class', 'task');
     taskContent.setAttribute('id', 'task-content');
@@ -36,22 +37,19 @@ function createTask(task, date) {
     updateButton.textContent = 'Update';
     deleteButton.textContent = 'Delete';
 
-    // add event listener
+    // add event listener to both buttons
     addRemoveEvent(deleteButton, li);
-    updateButton.addEventListener('click', () => {
-
-        updateSection.style.display = 'flex';
-    })
+    addUpdateEvent(updateButton, updateSection, li);
 
 
     taskSection.appendChild(taskContent);
-    taskSection.append(dateContent);
+    taskSection.appendChild(dateContent);
     buttonSection.appendChild(updateButton);
     buttonSection.appendChild(deleteButton);
 
     li.appendChild(taskSection);
     li.appendChild(buttonSection);
-    let updateSection = UpdateComponent(li);
+    
     li.appendChild(updateSection);
 
     return li;
@@ -64,3 +62,20 @@ function addRemoveEvent(button, anotherElem) {
         anotherElem.remove();
     })
 }
+
+function addUpdateEvent(button, anotherElem, li) {
+
+    button.addEventListener('click', () => {
+
+        anotherElem.style.display = 'flex';
+        anotherElem.childNodes[0].lastChild.value = li.childNodes[0].firstChild.textContent;
+        anotherElem.childNodes[1].lastChild.value = parseDate(li.childNodes[0].lastChild.textContent);
+    })
+}
+/** FIXED */
+function parseDate(date) {
+
+    let newDate = String(date).split('-');
+    return `${newDate[0]}-${newDate[1]}-${newDate[2]}`;
+}
+
