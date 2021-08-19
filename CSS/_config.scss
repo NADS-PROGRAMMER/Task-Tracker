@@ -1,0 +1,33 @@
+$dangerColor: #d9534f;
+$successColor: #5cb85c;
+$infoColor: #5bc0de;
+$bodyColor: #f7f7f7;
+$headerColor: #292b2c;
+
+// Default styles for all the elements.
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins, sans-serif;
+}
+
+/*
+  Mixins for displaying the section in flex.
+*/
+@mixin displayFlex($direction, $align-items, $justify-content) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+/*
+  Mixins for the button styles
+*/
+@mixin buttonStyles($padding, $font-size, $color) {
+  padding: $padding;
+  font-size: $font-size;
+  background-color: $color;
+  border: 1px solid black;
+}

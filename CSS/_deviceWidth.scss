@@ -1,0 +1,15 @@
+$screen-md-screen: 768px;
+$screen-lg-screen: 992px;
+$screen-dtop-screen: 1200px;
+
+@mixin lg {
+  @media only screen and (min-width: #{$screen-lg-screen}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: #{$screen-dtop-screen}) {
+    @content;
+  }
+}
