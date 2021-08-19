@@ -377,6 +377,16 @@ footer .accounts-section img {
   margin: 0 5px;
   -webkit-filter: invert(100%);
           filter: invert(100%);
+  -webkit-transition: -webkit-transform 300ms;
+  transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+  transition: transform 300ms, -webkit-transform 300ms;
+  cursor: pointer;
+}
+
+footer .accounts-section img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 footer .copyright-section small {

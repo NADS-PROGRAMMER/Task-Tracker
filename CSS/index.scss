@@ -202,6 +202,11 @@ footer {
       width: 3rem;
       margin: 0 5px;
       filter: invert(100%);
+      transition: transform 300ms;
+      cursor: pointer;
+    }
+    img:hover {
+      transform: scale(1.1);
     }
   }
   .copyright-section small {
