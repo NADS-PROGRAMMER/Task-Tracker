@@ -1,0 +1,93 @@
+@import "./config", "./deviceWidth";
+
+// The <ul> tag
+#tasks {
+  list-style-type: none;
+  overflow-y: auto;
+  height: 50vh;
+  border: 1px solid #ccc;
+  @include lg {
+    max-height: 30vh;
+  }
+  // The <li>' tag
+  .task {
+    @include displayFlex(column, flex-start, space-between);
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    /* Section that contains the TASK CONTENT and the DATE CONTENT */
+    .task-section {
+      #task-content {
+        font-size: 1.2rem;
+        font-weight: bold;
+        word-break: break-all;
+      }
+      #date-content {
+        font-weight: 600;
+        font-family: Rockwell, sans-serif;
+      }
+    }
+
+    /* Section that contains the UPDATE and DELETE buttons. */
+    .button-section {
+      @include displayFlex(row, none, space-between);
+      * {
+        margin: 2px;
+        cursor: pointer;
+      }
+      #update-button {
+        @include buttonStyles(5px, 1rem, $infoColor);
+      }
+      #delete-button {
+        @include buttonStyles(5px, 1rem, $dangerColor);
+      }
+      #update-button:active {
+        background: darken($infoColor, 10%);
+      }
+      #delete-button:active {
+        background: darken($dangerColor, 10%);
+      }
+    }
+
+    /* Section that contains the input tags and buttons for updating the task */
+    .update-section {
+      @include displayFlex(column, none, none);
+      display: none;
+      width: 100%;
+
+      // Media Queries for large screen
+      @include lg {
+        width: 50%;
+      }
+      section {
+        @include displayFlex(column, none, none);
+        margin: 5px 0;
+        input,
+        button {
+          padding: 5px;
+          font-size: 1rem;
+        }
+      }
+      .error-message {
+        color: $dangerColor;
+        font-weight: bold;
+        display: none;
+      }
+      .update-button-section {
+        @include displayFlex(row, center, flex-end);
+        width: 100%;
+
+        * {
+          margin: 0 5px;
+        }
+        #done-button {
+          @include buttonStyles(5px, 1rem, $successColor);
+          cursor: pointer;
+        }
+        #cancel-button {
+          @include buttonStyles(5px, 1rem, $infoColor);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+} // END OF TASKS CONTAINER STYLES.

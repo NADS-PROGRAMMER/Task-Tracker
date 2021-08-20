@@ -1,0 +1,27 @@
+@import "./config", "./deviceWidth";
+// HEADER TAG STYLES
+header {
+  background: $headerColor;
+  padding: 1rem;
+  width: 100%;
+
+  h1 {
+    color: $bodyColor;
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1rem;
+    color: $infoColor;
+  }
+
+  // MEDIA QUERIES
+  @include lg {
+    text-align: center;
+    h1 {
+      font-size: 3rem;
+    }
+    h3 {
+      font-size: 1.5rem;
+    }
+  }
+} // END OF HEADER
