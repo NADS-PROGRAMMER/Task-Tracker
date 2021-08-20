@@ -33,4 +33,9 @@ footer {
   @include lg {
     height: fit-content;
   }
+  @include desktop {
+    .copyright-section small {
+      font-size: 1rem;
+    }
+  }
 } // END OF FOOTER STYLES

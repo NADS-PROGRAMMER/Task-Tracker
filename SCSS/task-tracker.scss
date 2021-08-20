@@ -32,6 +32,9 @@
     #adding-message {
       font-weight: bold;
       display: none;
+      @include desktop {
+        font-size: 1.1rem;
+      }
     }
   }
 

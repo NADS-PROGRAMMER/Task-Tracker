@@ -94,3 +94,6 @@
     }
   }
 } // END OF TASKS CONTAINER STYLES.
+.task:hover {
+  background: lighten(#ccc, $amount: 15%);
+}
