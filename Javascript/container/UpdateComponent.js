@@ -29,6 +29,7 @@ function UpdateComponent(task) {
         }
     ))
 
+    updateSection.appendChild(createErrorMessage());
     updateSection.appendChild(createButtonSection(task));
 
     return updateSection;
@@ -57,6 +58,17 @@ function createInputField ({labelContent, type}) {
     section.appendChild(label);
     section.appendChild(input);
 
+    return section;
+}
+
+function createErrorMessage() {
+
+    let section = document.createElement('section');
+    let small = document.createElement('small');
+    small.textContent = 'Please fill up the required fields.'
+    small.setAttribute('class', 'error-message');
+
+    section.appendChild(small);
     return section;
 }
 
@@ -94,16 +106,21 @@ function createButtonSection(task) {
         let textbox = task.childNodes[2].firstChild.lastChild;
         let date = task.childNodes[2].childNodes[1].lastChild;
 
-        task.firstChild.firstChild.textContent = textbox.value;
-        task.firstChild.lastChild.textContent = date.value;
-        textbox.value = '';
-        date.value = '';
+        if (isFieldNotEmpty(textbox) && isFieldNotEmpty(date)) {
+            task.firstChild.firstChild.textContent = textbox.value;
+            task.firstChild.lastChild.textContent = date.value;
+            hideUpdateSection(task);
+            hideErrorMessage(task);
+            textbox.value = '';
+            date.value = '';
+            return;
+        }
+        showErrorMessage(task);
     });
 
     cancelButton.addEventListener('click', () => {
 
-        // Hides the update section.
-        task.firstChild.nextSibling.nextElementSibling.style.display = 'none';
+        hideUpdateSection(task);
     });
 
     // Appends the two buttons.
@@ -113,4 +130,23 @@ function createButtonSection(task) {
     return section;
 }
 
-export {UpdateComponent}
+function isFieldNotEmpty(inputField) {
+
+    return inputField.value !== '';
+}
+
+function hideUpdateSection(task) {
+
+    task.firstChild.nextSibling.nextElementSibling.style.display = 'none';
+}
+
+function showErrorMessage(task) {
+
+    task.childNodes[2].childNodes[2].firstChild.style.display = 'block';
+}
+
+function hideErrorMessage(task) {
+    task.childNodes[2].childNodes[2].firstChild.style.display = 'none';
+}
+
+export {UpdateComponent, isFieldNotEmpty}

@@ -7,7 +7,7 @@ body {
   background: $bodyColor;
 }
 
-// HEADER STYLES -
+// HEADER TAG STYLES
 header {
   background: $headerColor;
   padding: 1rem;
@@ -32,8 +32,9 @@ header {
       font-size: 1.5rem;
     }
   }
-}
+} // END OF HEADER
 
+// MAIN TAG STYLES.
 main {
   height: 100%;
 
@@ -46,14 +47,13 @@ main {
   @include desktop {
     width: 60%;
   }
-}
+} // END OF MAIN TAG STYLES
 
 /* TASK TRACKER STYLES 
-
-  It contains the header and the list of tasks of the user.
-*/
+  It contains the header and the list of tasks of the user. */
 #task-tracker {
   padding: 1rem;
+
   .task-tracker-header {
     @include displayFlex(column, none, none);
 
@@ -62,6 +62,7 @@ main {
       margin: 5px 0;
 
       label {
+        font-weight: 700;
         font-size: 1.1rem;
       }
       input,
@@ -77,14 +78,23 @@ main {
         background: darken($successColor, 10%);
       }
     }
+
+    #adding-message {
+      font-weight: bold;
+      display: none;
+    }
   }
 
   // MEDIA QUERIES
+  @include mediumSize {
+    width: 70%;
+    margin: 0 auto;
+  }
   @include lg {
     display: grid;
     grid-template-columns: 0.6fr 1fr;
     column-gap: 1rem;
-
+    width: 100%;
     height: 50%;
   }
 }
@@ -166,6 +176,11 @@ main {
           font-size: 1rem;
         }
       }
+      .error-message {
+        color: $dangerColor;
+        font-weight: bold;
+        display: none;
+      }
       .update-button-section {
         @include displayFlex(row, center, flex-end);
         width: 100%;
@@ -175,9 +190,11 @@ main {
         }
         #done-button {
           @include buttonStyles(5px, 1rem, $successColor);
+          cursor: pointer;
         }
         #cancel-button {
           @include buttonStyles(5px, 1rem, $infoColor);
+          cursor: pointer;
         }
       }
     }
