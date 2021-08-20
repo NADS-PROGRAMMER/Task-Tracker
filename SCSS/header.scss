@@ -15,6 +15,9 @@ header {
   }
 
   // MEDIA QUERIES
+  @include extraSmall {
+    text-align: center;
+  }
   @include lg {
     text-align: center;
     h1 {

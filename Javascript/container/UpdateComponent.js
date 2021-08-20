@@ -13,23 +13,27 @@ function UpdateComponent(task) {
     let updateSection = document.createElement('section');
     updateSection.setAttribute('class', 'update-section');
 
+    // Create and append the Input tag with a type of "text" with its label.
     updateSection.appendChild(
         createInputField(
         {
-            labelContent: 'New Task Name', 
+            labelContent: 'New Task Name:', 
             type: 'text'
         }
     ));
 
+    // Create and append the Input tag with a type of "date" with its label.
     updateSection.appendChild(
         createInputField(
         {
-            labelContent: 'Due Date',
+            labelContent: 'Due Date:',
             type: 'date'
         }
     ))
-
+    // Create and append the section with error message and DISPLAY IS NONE BY DEFAULT.
     updateSection.appendChild(createErrorMessage());
+
+    // Create and append the button section with the DONE AND CANCEL BUTTONS.
     updateSection.appendChild(createButtonSection(task));
 
     return updateSection;
@@ -61,6 +65,7 @@ function createInputField ({labelContent, type}) {
     return section;
 }
 
+/** A function that creates an error message */
 function createErrorMessage() {
 
     let section = document.createElement('section');

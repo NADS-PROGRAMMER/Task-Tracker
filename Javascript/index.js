@@ -107,15 +107,20 @@ function hideMessage() {
     successMessage.style.display = 'none';
 }
 
+/** An asynch function for creating a task.
+ */
 async function createTask() {
 
     try {
 
         let ul = document.querySelector('#tasks');
-        let {message, task, date} = await addTask();
-        showMessage(message, '#5cb85c');
-        ul.appendChild(TaskComponent(task, date));
 
+        // If the addTask() is resolve, it returns an object that contains the necessary information for the task.
+        let {message, task, date} = await addTask();
+        showMessage(message, '#5cb85c'); // show message and specified the color of the text into green.
+        ul.appendChild(TaskComponent(task, date)); // append the main TaskComponent.
+
+        // Wait for 2 sec before hiding a message
         setTimeout(() => {
             
             hideMessage();
@@ -124,6 +129,7 @@ async function createTask() {
 
     } catch (err) {
 
+        // If the addTask() is rejected, we show the error message and specified the color of the text to red.
         showMessage(err, '#d9534f');
     }
 }

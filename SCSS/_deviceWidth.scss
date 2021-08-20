@@ -1,6 +1,13 @@
+$screen-xs-screen: 540px;
 $screen-md-screen: 768px;
 $screen-lg-screen: 992px;
 $screen-dtop-screen: 1200px;
+
+@mixin extraSmall {
+  @media only screen and (min-width: #{$screen-xs-screen}) {
+    @content;
+  }
+}
 
 @mixin mediumSize {
   @media only screen and (min-width: #{$screen-md-screen}) {

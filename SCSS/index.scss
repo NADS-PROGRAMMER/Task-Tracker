@@ -7,11 +7,19 @@ body {
   background: $bodyColor;
 }
 
+.main-animation,
+.sub-animation {
+  display: inline-block;
+}
 // MAIN TAG STYLES.
 main {
   height: 100%;
 
   // MEDIA QUERIES
+  @include extraSmall {
+    width: 70%;
+    margin: 0 auto;
+  }
   @include lg {
     width: 70%;
     height: 50vh;

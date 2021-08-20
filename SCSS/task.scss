@@ -7,7 +7,7 @@
   height: 50vh;
   border: 1px solid #ccc;
   @include lg {
-    max-height: 30vh;
+    max-height: 40vh;
   }
   // The <li>' tag
   .task {
@@ -57,6 +57,9 @@
       // Media Queries for large screen
       @include lg {
         width: 50%;
+      }
+      label {
+        font-weight: 700;
       }
       section {
         @include displayFlex(column, none, none);
