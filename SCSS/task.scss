@@ -25,6 +25,11 @@
         font-weight: bold;
         font-family: Rockwell, sans-serif;
       }
+      #update-message {
+        font-weight: bold;
+        color: $successColor;
+        display: none;
+      }
     }
 
     /* Section that contains the UPDATE and DELETE buttons. */
@@ -68,6 +73,9 @@
         button {
           padding: 5px;
           font-size: 1rem;
+        }
+        input {
+          outline: none;
         }
       }
       .error-message {

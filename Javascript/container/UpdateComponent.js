@@ -1,19 +1,20 @@
+import {addOnInputEvent} from '../Events.js';
+
 "use strict";
 
 /**
- * A function that creates an UpdateComponent.
+ * A function that creates the UpdateComponent.
  * 
  * @param task 
  * - task that this UpdateComponent to attached to.
  * @returns 
- * - the UpdateComponent, as a whole.
- */
+ * - the UpdateComponent, as a whole. */
 function UpdateComponent(task) {
 
     let updateSection = document.createElement('section');
     updateSection.setAttribute('class', 'update-section');
 
-    // Create and append the Input tag with a type of "text" with its label.
+    // Create and append the Input tag with a type of "text", and with its label.
     updateSection.appendChild(
         createInputField(
         {
@@ -22,14 +23,15 @@ function UpdateComponent(task) {
         }
     ));
 
-    // Create and append the Input tag with a type of "date" with its label.
+    // Create and append the Input tag with a type of "date", and with its label.
     updateSection.appendChild(
         createInputField(
         {
             labelContent: 'Due Date:',
             type: 'date'
         }
-    ))
+    ));
+
     // Create and append the section with error message and DISPLAY IS NONE BY DEFAULT.
     updateSection.appendChild(createErrorMessage());
 
@@ -40,16 +42,14 @@ function UpdateComponent(task) {
 }
 
 /**
- * A function that creates an input tag and specified
- * the type by its parameter labelContent.
+ * A function that creates an input field. 
  * 
  * @param labelContent 
  * - Content of the label tag.
  * @param type 
  * - type of the input 
  * @returns 
- * - the section that contains the input tag.
- */
+ * - the section that contains the input tag. */
 function createInputField ({labelContent, type}) {
 
     let section = document.createElement('section');
@@ -112,10 +112,11 @@ function createButtonSection(task) {
         let date = task.childNodes[2].childNodes[1].lastChild;
 
         if (isFieldNotEmpty(textbox) && isFieldNotEmpty(date)) {
-            task.firstChild.firstChild.textContent = textbox.value;
-            task.firstChild.lastChild.textContent = date.value;
+            task.firstChild.childNodes[0].textContent = textbox.value;
+            task.firstChild.childNodes[1].textContent = date.value;
             hideUpdateSection(task);
             hideErrorMessage(task);
+            showUpdateMessage(task);
             textbox.value = '';
             date.value = '';
             return;
@@ -126,6 +127,7 @@ function createButtonSection(task) {
     cancelButton.addEventListener('click', () => {
 
         hideUpdateSection(task);
+        hideErrorMessage(task);
     });
 
     // Appends the two buttons.
@@ -148,6 +150,15 @@ function hideUpdateSection(task) {
 function showErrorMessage(task) {
 
     task.childNodes[2].childNodes[2].firstChild.style.display = 'block';
+}
+
+function showUpdateMessage(task) {
+
+    task.firstChild.lastChild.style.display = 'block';
+
+    setTimeout(() => {
+        task.firstChild.lastChild.style.display = 'none';
+    }, 2000)
 }
 
 function hideErrorMessage(task) {

@@ -46,9 +46,11 @@ function createTaskSection(taskContent, dateContent) {
 
     let task = createContent({textContent: taskContent, element: 'p', ids: 'task-content'});
     let date = createContent({textContent: dateContent, element: 'p', ids: 'date-content'})
+    let updateMessage = createContent({textContent: 'Task updated successfully!', element: 'small', ids: 'update-message'});
 
     taskSection.appendChild(task);
     taskSection.appendChild(date);
+    taskSection.appendChild(updateMessage);
 
     return taskSection;
 }
@@ -91,7 +93,7 @@ function createButtonSection(li, updateSection) {
 
         updateSection.style.display = 'flex';
         updateSection.childNodes[0].lastChild.value = li.childNodes[0].firstChild.textContent;
-        updateSection.childNodes[1].lastChild.value = parseDate(li.childNodes[0].lastChild.textContent);
+        updateSection.childNodes[1].lastChild.value = parseDate(li.childNodes[0].childNodes[1].textContent);
     });
 
     // Events for the delete button.
