@@ -1,77 +1,78 @@
-import {UpdateComponent, isFieldNotEmpty} from './container/UpdateComponent.js';
+import {isFieldNotEmpty} from './container/UpdateComponent.js';
+import {TaskComponent} from './container/TaskComponent.js';
 
 "use strict";
 
-/** A function that creates the task component. */
-function TaskComponent(task, date) {
+// /** A function that creates the task component. */
+// function TaskComponent(task, date) {
 
-    let li = document.createElement('li');
-    let taskContent = document.createElement('p');
-    let dateContent = document.createElement('p');
-    let taskSection = document.createElement('section');
-    let buttonSection = document.createElement('section');
-    let updateButton = document.createElement('button');
-    let deleteButton = document.createElement('button');
-    let updateSection = UpdateComponent(li);
+//     let li = document.createElement('li');
+//     let taskContent = document.createElement('p');
+//     let dateContent = document.createElement('p');
+//     let taskSection = document.createElement('section');
+//     let buttonSection = document.createElement('section');
+//     let updateButton = document.createElement('button');
+//     let deleteButton = document.createElement('button');
+//     let updateSection = UpdateComponent(li);
 
-    /** Setting all the attributes that match the */
-    li.setAttribute('class', 'task');
-    taskContent.setAttribute('id', 'task-content');
-    dateContent.setAttribute('id', 'date-content');
-    taskSection.setAttribute('class', 'task-section');
-    buttonSection.setAttribute('class', 'button-section');
-    updateButton.setAttribute('id', 'update-button');
-    deleteButton.setAttribute('id', 'delete-button');
+//     /** Setting all the attributes that match the */
+//     li.setAttribute('class', 'task');
+//     taskContent.setAttribute('id', 'task-content');
+//     dateContent.setAttribute('id', 'date-content');
+//     taskSection.setAttribute('class', 'task-section');
+//     buttonSection.setAttribute('class', 'button-section');
+//     updateButton.setAttribute('id', 'update-button');
+//     deleteButton.setAttribute('id', 'delete-button');
 
-    /** Sets all the values of the elements. */
-    taskContent.textContent = task;
-    dateContent.textContent = date;
-    updateButton.textContent = 'Update';
-    deleteButton.textContent = 'Delete';
+//     /** Sets all the values of the elements. */
+//     taskContent.textContent = task;
+//     dateContent.textContent = date;
+//     updateButton.textContent = 'Update';
+//     deleteButton.textContent = 'Delete';
 
-    // Adds event listener to both buttons
-    addRemoveEvent(deleteButton, li);
-    addUpdateEvent(updateButton, updateSection, li);
+//     // Adds event listener to both buttons
+//     addRemoveEvent(deleteButton, li);
+//     addUpdateEvent(updateButton, updateSection, li);
 
-    taskSection.appendChild(taskContent);
-    taskSection.appendChild(dateContent);
-    buttonSection.appendChild(updateButton);
-    buttonSection.appendChild(deleteButton);
+//     taskSection.appendChild(taskContent);
+//     taskSection.appendChild(dateContent);
+//     buttonSection.appendChild(updateButton);
+//     buttonSection.appendChild(deleteButton);
 
-    // Appends the elements.
-    li.appendChild(taskSection);
-    li.appendChild(buttonSection);
-    li.appendChild(updateSection);
+//     // Appends the elements.
+//     li.appendChild(taskSection);
+//     li.appendChild(buttonSection);
+//     li.appendChild(updateSection);
 
-    return li;
-}
+//     return li;
+// }
 
-function addRemoveEvent(button, anotherElem) {
+// function addRemoveEvent(button, anotherElem) {
 
-    button.addEventListener('click', () => {
+//     button.addEventListener('click', () => {
 
-        anotherElem.remove();
-    })
-}
+//         anotherElem.remove();
+//     })
+// }
 
-function addUpdateEvent(button, updateSection, li) {
+// function addUpdateEvent(button, updateSection, li) {
 
-    button.addEventListener('click', () => {
+//     button.addEventListener('click', () => {
 
-        updateSection.style.display = 'flex';
-        updateSection.childNodes[0].lastChild.value = li.childNodes[0].firstChild.textContent;
-        updateSection.childNodes[1].lastChild.value = parseDate(li.childNodes[0].lastChild.textContent);
-    })
-}
+//         updateSection.style.display = 'flex';
+//         updateSection.childNodes[0].lastChild.value = li.childNodes[0].firstChild.textContent;
+//         updateSection.childNodes[1].lastChild.value = parseDate(li.childNodes[0].lastChild.textContent);
+//     })
+// }
 
-/**
- * Converts the date that appropriate to the 
- * date input field date format */
-function parseDate(date) {
+// /**
+//  * Converts the date that appropriate to the 
+//  * date input field date format */
+// function parseDate(date) {
 
-    let newDate = String(date).split('-');
-    return `${newDate[0]}-${newDate[1]}-${newDate[2]}`;
-}
+//     let newDate = String(date).split('-');
+//     return `${newDate[0]}-${newDate[1]}-${newDate[2]}`;
+// }
 
 function addTask() {
 
@@ -118,6 +119,7 @@ async function createTask() {
         // If the addTask() is resolve, it returns an object that contains the necessary information for the task.
         let {message, task, date} = await addTask();
         showMessage(message, '#5cb85c'); // show message and specified the color of the text into green.
+        console.log(TaskComponent(task, date))
         ul.appendChild(TaskComponent(task, date)); // append the main TaskComponent.
 
         // Wait for 2 sec before hiding a message

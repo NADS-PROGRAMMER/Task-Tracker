@@ -5,14 +5,11 @@ import {UpdateComponent} from './UpdateComponent.js';
 function TaskComponent(task, date) {
 
     let li = document.createElement('li');
+    li.setAttribute('class', 'task');
     let updateSection = UpdateComponent(li);
 
-    li.appendChild(createTaskSection(
-
-        createContent({task: task, element: 'p', id: 'task-content'}),
-        createContent({task: date, element: 'p', id: 'date-content'}),
-    ))
-
+    // Appends the three section.
+    li.appendChild(createTaskSection(task, date))
     li.appendChild(createButtonSection(li, updateSection));
     li.appendChild(updateSection);
 
@@ -32,29 +29,37 @@ function TaskComponent(task, date) {
  * - id of the created element.
  * 
  * ALL PARAMETERS SHOULD BE IN TYPE STRING. */
-function createContent({textContent, element, id}) {
+function createContent({textContent, element, ids}) {
 
     let createdElem = document.createElement(element);
-    createdElem.setAttribute('id', id);
     createdElem.textContent = textContent;
+    createdElem.setAttribute('id', ids);
+    
 
     return createdElem;
 }
 
-function createTaskSection(...elements) {
+function createTaskSection(taskContent, dateContent) {
 
     let taskSection = document.createElement('section');
-    taskSection.setAttribute('class', 'taskSection');
+    taskSection.setAttribute('class', 'task-section');
 
-    elements.forEach(element => {
+    let task = createContent({textContent: taskContent, element: 'p', ids: 'task-content'});
+    let date = createContent({textContent: dateContent, element: 'p', ids: 'date-content'})
 
-        taskSection.appendChild(element);
-    })
+    taskSection.appendChild(task);
+    taskSection.appendChild(date);
 
     return taskSection;
 }
 
-/** Create a button element. */
+/** Create a button element.
+ * 
+ * @param textContent
+ * - the text of the button.
+ * 
+ * @param id 
+ * - the id of the button. */
 function createButton({textContent, id}) {
 
     let button = document.createElement('button');
@@ -64,7 +69,15 @@ function createButton({textContent, id}) {
     return button;
 }
 
-/** Creates a section tag. */
+/** Creates a button tag
+ * 
+ * @param li
+ * - a <li> tag or the task.
+ * 
+ * @param updateSection 
+ * - the update section for the update button to open when the update 
+ * button is clicked
+ */
 function createButtonSection(li, updateSection) {
 
     let section = document.createElement('section');
@@ -73,6 +86,7 @@ function createButtonSection(li, updateSection) {
     let updateButton = createButton({textContent: 'Update', id: 'update-button'});
     let deleteButton = createButton({textContent: 'Delete', id: 'delete-button'});
 
+    // Events for the update button.
     updateButton.addEventListener('click', () => {
 
         updateSection.style.display = 'flex';
@@ -80,6 +94,7 @@ function createButtonSection(li, updateSection) {
         updateSection.childNodes[1].lastChild.value = parseDate(li.childNodes[0].lastChild.textContent);
     });
 
+    // Events for the delete button.
     deleteButton.addEventListener('click', () => {
 
         li.remove();
@@ -101,4 +116,5 @@ function parseDate(date) {
     return `${newDate[0]}-${newDate[1]}-${newDate[2]}`;
 }
 
-console.log(TaskComponent('Wow', '11/23/00'))
+
+export {TaskComponent}
